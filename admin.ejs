@@ -6,12 +6,16 @@
 </head>
 <body>
   <h1>Admin Dashboard</h1>
+
+  <!-- Form to add a new drink -->
   <form action="/drinks" method="POST">
     <input type="text" name="name" placeholder="Drink Name" required>
     <textarea name="description" placeholder="Description" required></textarea>
     <input type="number" name="price" placeholder="Price" required>
     <button type="submit">Add Drink</button>
   </form>
+
+  <!-- List of drinks with edit and delete options -->
   <ul>
     <% drinks.forEach(drink => { %>
       <li>
@@ -19,13 +23,35 @@
         <p><%= drink.description %></p>
         <p>Price: $<%= drink.price %></p>
         <br>
-        <a href="/drinks/edit/<%= drink._id %>">Edit</a>
+        <!-- Button to toggle edit form for the specific drink -->
+        <button onclick="toggleEditForm('<%= drink._id %>')">Edit</button>
         <form action="/drinks/delete/<%= drink._id %>" method="POST" style="display:inline;">
           <button type="submit">Delete</button>
+        </form>
+        <!-- Edit form for the specific drink -->
+        <form id="edit-form-<%= drink._id %>" action="/drinks/update/<%= drink._id %>" method="POST" style="display:none;">
+          <input type="text" name="name" placeholder="Drink Name" value="<%= drink.name %>" required>
+          <textarea name="description" placeholder="Description" required><%= drink.description %></textarea>
+          <input type="number" name="price" placeholder="Price" value="<%= drink.price %>" required>
+          <button type="submit">Update Drink</button>
+          <button type="button" onclick="toggleEditForm('<%= drink._id %>')">Cancel</button>
         </form>
       </li>
     <% }) %>
   </ul>
+
+  <!-- Script to toggle the visibility of edit forms -->
+  <script>
+    function toggleEditForm(drinkId) {
+      var form = document.getElementById('edit-form-' + drinkId);
+      if (form.style.display === 'none' || form.style.display === '') {
+        form.style.display = 'block';
+      } else {
+        form.style.display = 'none';
+      }
+    }
+  </script>
 </body>
 </html>
+
 
