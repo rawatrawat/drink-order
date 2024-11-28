@@ -32,3 +32,23 @@
   </ul>
 </body>
 </html>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Item</title>
+  <link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+<body>
+  <h1>Edit Item</h1>
+  <form action="/items/<%= item._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+    <input type="text" name="name" placeholder="Item Name" value="<%= item.name %>" required>
+    <textarea name="description" placeholder="Description" required><%= item.description %></textarea>
+    <input type="number" name="price" placeholder="Price" value="<%= item.price %>" required>
+    <input type="file" name="image" accept="image/*">
+    <button type="submit">Update Item</button>
+  </form>
+  <a href="/admin">Back to Admin Dashboard</a>
+</body>
+</html>
+
