@@ -1,19 +1,20 @@
 const express = require('express');
-const mongoose = require('mongoose');
+
 const bodyParser = require('body-parser');
-const Drink = require('./models/drink');
+
 
 const app = express();
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://new_user_1:new_user_1@cluster0.3aytms0.mongodb.net/', {
-  retryWrites: true,
-  w: 'majority'
-}).then(() => {
-  console.log('Connected to MongoDB');
-}).catch(err => {
-  console.error('Failed to connect to MongoDB', err);
-});
+const mongoose = require('mongoose');
+
+const uri = 'mongodb+srv://s1380246:s1380246@cluster0.plvwi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+// mongoose.connect(uri);
+
+const drinkSchema = require('./models/drinks');
+
+// Compile our schema into a Model. 
+const Drink = mongoose.model('Drink', drinkSchema);
 
 // Middleware
 app.use(bodyParser.json());
@@ -82,8 +83,7 @@ app.post('/drinks/delete/:id', async (req, res) => {
 
 // Start the server
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
+app.listen(PORT, () => console.log(`Server running on port http://localhost:${PORT}`));
 
 
 
