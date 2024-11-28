@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+<body>
+  <h1>Admin Dashboard</h1>
+  <form action="/items" method="POST" enctype="multipart/form-data">
+    <input type="text" name="name" placeholder="Item Name" required>
+    <textarea name="description" placeholder="Description" required></textarea>
+    <input type="number" name="price" placeholder="Price" required>
+    <input type="file" name="image" accept="image/*">
+    <button type="submit">Add Item</button>
+  </form>
+  <ul>
+    <% items.forEach(item => { %>
+      <li>
+        <h3><%= item.name %></h3>
+        <p><%= item.description %></p>
+        <p>Price: $<%= item.price %></p>
+        <% if (item.image) { %>
+          <img src="<%= item.image %>" alt="<%= item.name %>" width="100">
+        <% } %>
+        <br>
+        <a href="/items/edit/<%= item._id %>">Edit</a>
+        <form action="/items/<%= item._id %>?_method=DELETE" method="POST" style="display:inline;">
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>
