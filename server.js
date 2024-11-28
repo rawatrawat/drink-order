@@ -144,7 +144,76 @@ app.post('/:action', async (req, res) => {
 // ..................................................
 // RESTful CRUD
 
-// ...
+// RESTful CRUD Endpoints
 
+// Create a new drink
+app.post('/api/drinks', async (req, res) => {
+  try {
+    const { name, description, price, image } = req.body;
+    const drink = new Drink({ name, description, price, image });
+    const savedDrink = await drink.save();
+    res.status(201).json(savedDrink);
+  } catch (error) {
+    res.status(500).json({ message: 'Error creating drink', error });
+  }
+});
+
+// Read all drinks
+app.get('/api/drinks', async (req, res) => {
+  try {
+    const drinks = await Drink.find();
+    res.status(200).json(drinks);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching drinks', error });
+  }
+});
+
+// Read a single drink by ID
+app.get('/api/drinks/:id', async (req, res) => {
+  try {
+    const drink = await Drink.findById(req.params.id);
+    if (drink) {
+      res.status(200).json(drink);
+    } else {
+      res.status(404).json({ message: 'Drink not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching drink', error });
+  }
+});
+
+// Update a drink
+app.put('/api/drinks/:id', async (req, res) => {
+  try {
+    const { name, description, price, image } = req.body;
+    const updatedDrink = await Drink.findByIdAndUpdate(req.params.id, { name, description, price, image }, { new: true });
+    if (updatedDrink) {
+      res.status(200).json(updatedDrink);
+    } else {
+      res.status(404).json({ message: 'Drink not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating drink', error });
+  }
+});
+
+// Delete a drink
+app.delete('/api/drinks/:id', async (req, res) => {
+  try {
+    const deletedDrink = await Drink.findByIdAndDelete(req.params.id);
+    if (deletedDrink) {
+      res.status(200).json({ message: 'Drink deleted' });
+    } else {
+      res.status(404).json({ message: 'Drink not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Error deleting drink', error });
+  }
+});
+
+// Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+
+
