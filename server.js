@@ -1,33 +1,41 @@
 const express = require('express');
-
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+// Connect to MongoDB
+mongoose.connect('mongodb+srv://your_username:your_password@cluster0.mongodb.net/your_db', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
+// Create Express app
 const app = express();
 
-// Connect to MongoDB
-const mongoose = require('mongoose');
-
-const uri = 'mongodb+srv://s1380246:s1380246@cluster0.plvwi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
-// mongoose.connect(uri);
-
-const drinkSchema = require('./models/drinks');
-
-// Compile our schema into a Model. 
-const Drink = mongoose.model('Drink', drinkSchema);
-
-// Middleware
+// Middleware for parsing JSON bodies
 app.use(bodyParser.json());
+
+// Middleware for parsing URL-encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Set static folder for public resources
 app.use(express.static('public'));
+
+// Set views folder for EJS templates
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
+// Define the Drink model
+const Drink = mongoose.model('Drink', new mongoose.Schema({
+  name: String,
+  description: String,
+  price: Number,
+}));
+
 // Route for admin dashboard
-app.get('/admin', async (req, res) => {
+app.get('/admin/drinks', async (req, res) => {
   try {
     const drinks = await Drink.find();
-    res.render('admin', { drinks });
+    res.render('admin_drinks', { drinks });
   } catch (error) {
     console.error('Error retrieving drinks:', error);
     res.status(500).send('Error retrieving drinks');
@@ -40,7 +48,7 @@ app.post('/drinks', async (req, res) => {
   const drink = new Drink({ name, description, price });
   try {
     await drink.save();
-    res.redirect('/admin');
+    res.redirect('/admin/drinks');
   } catch (error) {
     console.error('Error adding drink:', error);
     res.status(500).send('Error adding drink');
@@ -63,7 +71,7 @@ app.post('/drinks/update/:id', async (req, res) => {
   const { name, description, price } = req.body;
   try {
     await Drink.findByIdAndUpdate(req.params.id, { name, description, price });
-    res.redirect('/admin');
+    res.redirect('/admin/drinks');
   } catch (error) {
     console.error('Error updating drink:', error);
     res.status(500).send('Error updating drink');
@@ -74,7 +82,7 @@ app.post('/drinks/update/:id', async (req, res) => {
 app.post('/drinks/delete/:id', async (req, res) => {
   try {
     await Drink.findByIdAndDelete(req.params.id);
-    res.redirect('/admin');
+    res.redirect('/admin/drinks');
   } catch (error) {
     console.error('Error deleting drink:', error);
     res.status(500).send('Error deleting drink');
@@ -83,8 +91,7 @@ app.post('/drinks/delete/:id', async (req, res) => {
 
 // Start the server
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port http://localhost:${PORT}`));
-
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 
 
