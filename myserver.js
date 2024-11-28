@@ -8,28 +8,23 @@ mongoose.connect('mongodb+srv://s1380246:s1380246@cluster0.plvwi.mongodb.net/?re
   useUnifiedTopology: true,
 });
 
-// Create Express app
 const app = express();
 
-// Middleware for parsing JSON bodies
 app.use(bodyParser.json());
-
-// Middleware for parsing URL-encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// Set static folder for public resources
 app.use(express.static('public'));
-
-// Set views folder for EJS templates
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
-// Define the Drink model
-const Drink = mongoose.model('Drink', new mongoose.Schema({
+// Assuming you have a MongoDB client connected and available as `db`
+const db = mongoose.connection;
+
+const drinkSchema = new mongoose.Schema({
   name: String,
   description: String,
   price: Number,
-}));
+});
+const Drink = mongoose.model('Drink', drinkSchema);
 
 // Route for admin dashboard
 app.get('/admin/drinks', async (req, res) => {
@@ -89,10 +84,66 @@ app.post('/drinks/delete/:id', async (req, res) => {
   }
 });
 
-// Start the server
+// CRUD operations using direct MongoDB collection access
+const performCRUDOperation = async (action, data) => {
+  const collection = db.collection('drinks');
+  let results;
+
+  switch (action) {
+    case 'create':
+      results = await collection.insertOne(data);
+      console.log("Inserted one document: " + JSON.stringify(results));
+      break;
+    case 'read':
+      results = await collection.find({_id: mongoose.Types.ObjectId(data.id)}).toArray();
+      console.log("Found documents: " + JSON.stringify(results));
+      break;
+    case 'update':
+      results = await collection.updateOne({_id: mongoose.Types.ObjectId(data.id)}, {$set: data});
+      console.log("Updated one document: " + JSON.stringify(results));
+      break;
+    case 'delete':
+      results = await collection.deleteMany({_id: mongoose.Types.ObjectId(data.id)});
+      console.log("Deleted documents: " + JSON.stringify(results));
+      break;
+    default:
+      console.log("Invalid action specified.");
+      break;
+  }
+
+  return results;
+};
+
+// Route for creating a document
+app.post('/create', async (req, res) => {
+  const { name, description, price } = req.body;
+  const results = await performCRUDOperation('create', { name, description, price });
+  res.json(results);
+});
+
+// Route for reading documents
+app.post('/read', async (req, res) => {
+  const { id } = req.body;
+  const results = await performCRUDOperation('read', { id });
+  res.json(results);
+});
+
+// Route for updating a document
+app.post('/update', async (req, res) => {
+  const { id, name, description, price } = req.body;
+  const results = await performCRUDOperation('update', { _id: id, name, description, price });
+  res.json(results);
+});
+
+// Route for deleting documents
+app.post('/delete', async (req, res) => {
+  const { id } = req.body;
+  const results = await performCRUDOperation('delete', { id });
+  res.json(results);
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
 
 
 
