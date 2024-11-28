@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://your_username:your_password@cluster0.mongodb.net/your_db', {
+mongoose.connect('mongodb+srv://s1380246:s1380246@cluster0.plvwi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
