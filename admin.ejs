@@ -1,56 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Admin Dashboard</title>
-  <link rel="stylesheet" type="text/css" href="/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <h1>Admin Dashboard</h1>
+    <h1>Admin Dashboard</h1>
 
-  <!-- Form to add a new drink -->
-  <form action="/drinks" method="POST">
-    <input type="text" name="name" placeholder="Drink Name" required>
-    <textarea name="description" placeholder="Description" required></textarea>
-    <input type="number" name="price" placeholder="Price" required>
-    <button type="submit">Add Drink</button>
-  </form>
+    <!-- Create Drink Form -->
+    <h2>Add New Drink</h2>
+    <form action="/drinks" method="POST">
+        <label for="name">Drink Name:</label>
+        <input type="text" id="name" name="name" required>
 
-  <!-- List of drinks with edit and delete options -->
-  <ul>
-    <% drinks.forEach(drink => { %>
-      <li>
-        <h3><%= drink.name %></h3>
-        <p><%= drink.description %></p>
-        <p>Price: $<%= drink.price %></p>
-        <br>
-        <!-- Button to toggle edit form for the specific drink -->
-        <button onclick="toggleEditForm('<%= drink._id %>')">Edit</button>
-        <form action="/drinks/delete/<%= drink._id %>" method="POST" style="display:inline;">
-          <button type="submit">Delete</button>
-        </form>
-        <!-- Edit form for the specific drink -->
-        <form id="edit-form-<%= drink._id %>" action="/drinks/update/<%= drink._id %>" method="POST" style="display:none;">
-          <input type="text" name="name" placeholder="Drink Name" value="<%= drink.name %>" required>
-          <textarea name="description" placeholder="Description" required><%= drink.description %></textarea>
-          <input type="number" name="price" placeholder="Price" value="<%= drink.price %>" required>
-          <button type="submit">Update Drink</button>
-          <button type="button" onclick="toggleEditForm('<%= drink._id %>')">Cancel</button>
-        </form>
-      </li>
-    <% }) %>
-  </ul>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
 
-  <!-- Script to toggle the visibility of edit forms -->
-  <script>
-    function toggleEditForm(drinkId) {
-      var form = document.getElementById('edit-form-' + drinkId);
-      if (form.style.display === 'none' || form.style.display === '') {
-        form.style.display = 'block';
-      } else {
-        form.style.display = 'none';
-      }
-    }
-  </script>
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" required>
+
+        <button type="submit">Add Drink</button>
+    </form>
+
+    <!-- Read Drinks -->
+    <h2>Drinks List</h2>
+    <ul>
+        <% drinks.forEach(function(drink) { %>
+            <li>
+                <h3><%= drink.name %></h3>
+                <p><%= drink.description %></p>
+                <p>Price: $<%= drink.price %></p>
+                <!-- Edit Drink Form -->
+                <form action="/drinks/edit/<%= drink._id %>" method="GET">
+                    <button type="submit">Edit</button>
+                </form>
+                <!-- Delete Drink Form -->
+                <form action="/drinks/delete/<%= drink._id %>" method="POST">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        <% }) %>
+    </ul>
 </body>
 </html>
 
