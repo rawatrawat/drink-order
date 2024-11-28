@@ -1,0 +1,6 @@
+app.get('/create', async (req, res) => {
+    const { id, name, quantity, location } = req.query;
+    const results = await performCRUDOperation(db, 'create', { id, name, quantity, location });
+
+    res.redirect('/');
+});

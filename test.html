@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <title>WELCOME TO MY PAGE!</title>
+  </head>
+  <script>
+    function link(a){
+		const CRUD = (a);
+		const curUrl = window.location.href;
+		const id = document.getElementById('id').value;
+		const name = document.getElementById('name').value;
+		const quantity = document.getElementById('quantity').value;
+		const location = document.getElementById('location').value;
+		  
+		let url = `${curUrl}/${CRUD}?id=${id}&name=${name}&quantity=${quantity}&location=${location}`;
+		document.getElementById('form1').action = url;
+		document.getElementById('form1').submit();
+	}
+		
+  </script>
+  <body>
+    <form method="get" id="form1" action="">
+      ID: <input type="text" id="id" name="id" /><br />
+	  NAME: <input type="text" id="name" name ="name" /><br />
+      QUANTITY: <input type="text"  id="quantity" name ="quantity" /><br />
+	  LOCATION: <input type="text" id="location" name ="location" /><br />
+      <p>
+	  <input type="button" value="CREATE" onclick="link('create')"/>
+	  <input type="button" value="UPDATE" onclick="link('update')"/>
+	  <input type="button" value="READ" onclick="link('read')"/>
+	  <input type="button" value="DELETE" onclick="link('delete')"/>
+      <input type="reset" value="RESET" />
+	  </p>
+	  <p id="text">
+	  </p>
+    </form>
+  </body>
+</html>
