@@ -1,7 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>Order Form</title>
     <link rel="stylesheet" type="text/css" href="/styles.css">
     <style>
@@ -15,11 +13,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            transition: background-color 0.3s;
-        }
-        body.dark {
-            background-color: #333;
-            color: white;
+            color: #333;
         }
         .order-form-container {
             background-color: rgba(255, 255, 255, 0.9);
@@ -32,24 +26,22 @@
         .order-form-container h1 {
             margin-bottom: 20px;
         }
-        .order-form-container input[type="radio"],
-        .order-form-container select {
-            margin-right: 10px;
-        }
         .order-form-container label {
             display: block;
             margin: 10px 0;
+        }
+        .order-form-container input[type="radio"] {
+            margin-right: 10px;
         }
         .order-form-container button {
             background-color: #4CAF50;
             color: white;
             border: none;
-            padding: 15px 20px;
+            padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
             margin: 5px;
             font-size: 16px;
-            width: 100%;
         }
         .order-form-container button:hover {
             background-color: #45a049;
@@ -57,68 +49,51 @@
         .order-form-container .actions {
             display: flex;
             justify-content: space-around;
-            margin-top: 20px;
-        }
-        .theme-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            cursor: pointer;
+            width: 100%;
         }
     </style>
 </head>
 <body>
-    <div class="theme-toggle" onclick="toggleTheme()">Toggle Theme</div>
     <div class="order-form-container">
         <h1>Place Your Order</h1>
-        <form id="orderForm" method="get" action="">
+        <form method="get" id="form1" action="">
             <label for="name">Choose a Drink:</label>
-            <select id="name" name="name" class="form-control">
-                <option value="milkT">Milk Tea</option>
-                <option value="orangeT">Orange Tea</option>
-                <option value="greenT">Green Tea</option>
-            </select>
+            <input type="radio" id="name" name="name" value="milkT">Milk Tea
+            <input type="radio" id="name" name="name" value="orangeT">Orange Tea
+            <input type="radio" id="name" name="name" value="greenT">Green Tea<br/>
 
             <label for="ice">Ice Level:</label>
-            <select id="ice" name="ice" class="form-control">
-                <option value="100">100%</option>
-                <option value="75">75%</option>
-                <option value="50">50%</option>
-                <option value="25">25%</option>
-                <option value="0">0%</option>
-            </select>
+            <input type="radio" id="ice" name="ice" value="100">100%
+            <input type="radio" id="ice" name="ice" value="75">75%
+            <input type="radio" id="ice" name="ice" value="50">50%
+            <input type="radio" id="ice" name="ice" value="25">25%
+            <input type="radio" id="ice" name="ice" value="0">0%<br/>
 
             <label for="orderAmount">Order Amount:</label>
-            <select id="orderAmount" name="orderAmount" class="form-control">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
+            <input type="radio" id="orderAmount" name="orderAmount" value="1">1
+            <input type="radio" id="orderAmount" name="orderAmount" value="2">2
+            <input type="radio" id="orderAmount" name="orderAmount" value="3">3
+            <input type="radio" id="orderAmount" name="orderAmount" value="4">4
+            <input type="radio" id="orderAmount" name="orderAmount" value="5">5<br/>
 
             <label for="size">Size:</label>
-            <select id="size" name="size" class="form-control">
-                <option value="L">Large</option>
-                <option value="M">Medium</option>
-                <option value="S">Small</option>
-            </select>
+            <input type="radio" id="size" name="size" value="L">Large
+            <input type="radio" id="size" name="size" value="M">Medium
+            <input type="radio" id="size" name="size" value="S">Small<br/>
 
             <label for="sugar">Sugar Level:</label>
-            <select id="sugar" name="sugar" class="form-control">
-                <option value="100">100%</option>
-                <option value="75">75%</option>
-                <option value="50">50%</option>
-                <option value="25">25%</option>
-                <option value="0">0%</option>
-            </select>
+            <input type="radio" id="sugar" name="sugar" value="100">100%
+            <input type="radio" id="sugar" name="sugar" value="75">75%
+            <input type="radio" id="sugar" name="sugar" value="50">50%
+            <input type="radio" id="sugar" name="sugar" value="25">25%
+            <input type="radio" id="sugar" name="sugar" value="0">0%<br/>
 
             <div class="actions">
-                <button type="button" onclick="link('create')">Create</button>
-                <button type="button" onclick="link('update')">Update</button>
-                <button type="button" onclick="link('read')">Read</button>
-                <button type="button" onclick="link('delete')">Delete</button>
-                <button type="reset">Reset</button>
+                <input type="button" value="CREATE" onclick="link('create')"/>
+                <input type="button" value="UPDATE" onclick="link('update')"/>
+                <input type="button" value="READ" onclick="link('read')"/>
+                <input type="button" value="DELETE" onclick="link('delete')"/>
+                <input type="reset" value="RESET" />
             </div>
         </form>
         <form method="get" action="/logout">
@@ -127,12 +102,8 @@
     </div>
 
     <script>
-        function toggleTheme() {
-            document.body.classList.toggle('dark');
-        }
-
         function link(action) {
-            const form = document.getElementById('orderForm');
+            const form = document.getElementById('form1');
             const url = `/order/${action}?${new URLSearchParams(new FormData(form))}`;
             form.action = url;
             form.submit();
