@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-image: url('/th.jpg');
+            background-image: url('/images/background.jpg');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -27,6 +27,16 @@
         }
         .success-container h1 {
             margin-bottom: 20px;
+        }
+        .success-container p {
+            font-size: 18px;
+        }
+        .success-container ul {
+            list-style: none;
+            padding: 0;
+        }
+        .success-container li {
+            margin: 10px 0;
         }
         .success-container button {
             background-color: #4CAF50;
@@ -58,11 +68,11 @@
                 <h2>Order Details:</h2>
                 <ul>
                     <% results.forEach(result => { %>
-                        <li>Name: <%= result.name %></li>
-                        <li>Ice: <%= result.ice %></li>
-                        <li>Order Amount: <%= result.orderAmount %></li>
-                        <li>Size: <%= result.size %></li>
-                        <li>Sugar: <%= result.sugar %></li>
+                        <li><strong>Name:</strong> <%= result.name %></li>
+                        <li><strong>Ice:</strong> <%= result.ice %></li>
+                        <li><strong>Order Amount:</strong> <%= result.orderAmount %></li>
+                        <li><strong>Size:</strong> <%= result.size %></li>
+                        <li><strong>Sugar:</strong> <%= result.sugar %></li>
                         <br>
                     <% }); %>
                 </ul>
