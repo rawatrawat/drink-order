@@ -17,7 +17,7 @@
 >> User.js for User schema 
 
 # Cloud URL
-- Our server URL: [Our Cloud URL Here]
+- [Our server URL: (https://drink-order-2.onrender.com)]
 
 # Operation Guides
 ## Login/Logout Pages
@@ -26,27 +26,41 @@
 - If you login as normal user, it should redirect the the ordering page.
 
 ## CRUD Web Pages
-- Create: [Describe how to create a new entry]
->>Go to the admin dashboard.
->>Fill in the form with the drink's name, description, and price.
->>Click "Save Item" to add a new drink entry.
+Here are the CRUD Web Pages instructions tailored for users who can log in as guests. 
+## CRUD Web Pages for Users
+- **Login**: 
+  1. Navigate to the login page.
+  2. Enter the username `guest` and password `guest`.
+  3. Click the "Login" button to access the order page.
 
->>Go to the user dashboard.
+- **Create (Place an Order)**:
+  1. Navigate to the order page after logging in.
+  2. Choose a drink by selecting the desired option (Milk Tea, Orange Tea, or Green Tea).
+  3. Select your preferred ice level, order amount, size, and sugar level.
+  4. Click the "CREATE" button to place a new order.
 
-- Read: [Describe how to read entries]
->>Navigate to the admin dashboard.
->>View the list of drinks displayed in the table.
+- **Read (View Your Order)**:
+  1. While on the order page, you can view your order details by clicking the "READ" button.
+  2. The details of your order will be displayed, showing the drink name, ice level, order amount, size, and sugar level.
 
->>Navigate to the user dashboard.
+- **Update (Modify Your Order)**:
+  1. If you need to update your order, make the necessary changes to your drink selection, ice level, order amount, size, or sugar level.
+  2. Click the "UPDATE" button to modify your existing order.
 
-- Update: [Describe how to update an entry]
->>Go to the admin dashboard.
->>Click the "Edit" button next to the drink you want to modify.
->>Update the drink's details in the form and click "Update Item."
+- **Delete (Cancel Your Order)**:
+  1. If you wish to cancel your order, click the "DELETE" button on the order page.
+  2. This will remove the existing order details.
 
-- Delete: [Describe how to delete an entry]
->>Navigate to the admin dashboard.
->>Click the "Delete" button next to the drink you wish to remove.
+- **Reset (Clear the Form)**:
+  1. If you want to clear the form and start over, click the "RESET" button.
+  2. This will reset all fields on the form to their default values.
+
+- **Logout**:
+  1. To log out, click the "LOGOUT" button on the order page.
+  2. This will redirect you back to the login page.
+
+## Navigation
+- **Back Home Button**: After performing any action (create, update, read, delete), use the "Back Home" button to return to the CRUD web page.
 
 ## RESTful CRUD Services
 - APIs: [List all APIs with HTTP request types and path URIs]
