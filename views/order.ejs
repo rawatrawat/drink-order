@@ -53,82 +53,79 @@
             justify-content: space-around;
             margin-top: 20px;
         }
-        .order-form-container img {
-            width: 50px;
-            height: 50px;
-            vertical-align: middle;
-            margin-right: 10px;
-        }
     </style>
-<html>
-<head>
-    <title>Order Form</title>
-</head>
-<script>
-        function link(a){
-			const CRUD = a;
-            const order = 'order';
+    <script>
+        function link(a) {
+            const CRUD = a;
             const curUrl = window.location.href;
-            const name = document.getElementById('name').value;
-            const ice = document.getElementById('ice').value;
-            const amount = document.getElementById('orderAmount').value;
-            const size = document.getElementById('size').value;
-            const sugar = document.getElementById('sugar').value;
-			
-			
-            let url = `${curUrl}/${CRUD}?name=${name}&ice=${ice}&amount=${amount}&size=${size}&sugar=${sugar}`;
+            const name = document.querySelector('input[name="name"]:checked').value;
+            const ice = document.querySelector('input[name="ice"]:checked').value;
+            const orderAmount = document.querySelector('input[name="orderAmount"]:checked').value;
+            const size = document.querySelector('input[name="size"]:checked').value;
+            const sugar = document.querySelector('input[name="sugar"]:checked').value;
+
+            let url = `${curUrl}/${CRUD}?name=${name}&ice=${ice}&orderAmount=${orderAmount}&size=${size}&sugar=${sugar}`;
             document.getElementById('form1').action = url;
             document.getElementById('form1').submit();
-
-
-
         }
-
-</script>
+    </script>
+</head>
 <body>
-	<form method="get" id="form1" action="">
-		Name: 
-            <input type="radio" id="name" name="name" value="milkT">Milk Tea
-            <input type="radio" id="name" name="name" value="orangeT">Orange Tea
-            <input type="radio" id="name" name="name" value="greenT">Green Tea<br/>
-
-        Ice: 
-            <input type="radio" id="ice" name="ice" value="100">100%
-            <input type="radio" id="ice" name="ice" value="75">75%
-            <input type="radio" id="ice" name="ice" value="50">50%
-            <input type="radio" id="ice" name="ice" value="25">25%
-            <input type="radio" id="ice" name="ice" value="0">0%<br/>
-
-        Order Amount: 
-            <input type="radio" id="orderAmount" name="orderAmount" value="1">1
-            <input type="radio" id="orderAmount" name="orderAmount" value="2">2
-            <input type="radio" id="orderAmount" name="orderAmount" value="3">3
-            <input type="radio" id="orderAmount" name="orderAmount" value="4">4
-            <input type="radio" id="orderAmount" name="orderAmount" value="5">5<br/>
-
-        Size: 
-            <input type="radio" id="size" name="size" value="L">Large
-            <input type="radio" id="size" name="size" value="M">Medium
-            <input type="radio" id="size" name="size" value="S">Small<br/>
-
-        Sugar: 
-            <input type="radio" id="sugar" name="sugar" value="100">100%
-            <input type="radio" id="sugar" name="sugar" value="75">75%
-            <input type="radio" id="sugar" name="sugar" value="50">50%
-            <input type="radio" id="sugar" name="sugar" value="25">25%
-            <input type="radio" id="sugar" name="sugar" value="0">0%<br/>
-			
-      <p>
-	  <input type="button" value="CREATE" onclick="link('create')"/>
-	  <input type="button" value="UPDATE" onclick="link('update')"/>
-	  <input type="button" value="READ" onclick="link('read')"/>
-	  <input type="button" value="DELETE" onclick="link('delete')"/>
-      <input type="reset" value="RESET" />
-	  </p>
-    <br/>
-    </form>
-    <form method="get" action="/logout">
-        <input type="submit" value="LOGOUT"/>
-    </form>
+    <div class="order-form-container">
+        <h1>Order Form</h1>
+        <form id="form1" method="get">
+            <div>
+                <label>
+                    <input type="radio" id="name" name="name" value="milkT">Milk Tea
+                </label>
+                <label>
+                    <input type="radio" id="name" name="name" value="orangeT">Orange Tea
+                </label>
+                <label>
+                    <input type="radio" id="name" name="name" value="greenT">Green Tea
+                </label>
+            </div>
+            <div>
+                <label>Ice:</label>
+                <input type="radio" id="ice" name="ice" value="100">100%
+                <input type="radio" id="ice" name="ice" value="75">75%
+                <input type="radio" id="ice" name="ice" value="50">50%
+                <input type="radio" id="ice" name="ice" value="25">25%
+                <input type="radio" id="ice" name="ice" value="0">0%
+            </div>
+            <div>
+                <label>Order Amount:</label>
+                <input type="radio" id="orderAmount" name="orderAmount" value="1">1
+                <input type="radio" id="orderAmount" name="orderAmount" value="2">2
+                <input type="radio" id="orderAmount" name="orderAmount" value="3">3
+                <input type="radio" id="orderAmount" name="orderAmount" value="4">4
+                <input type="radio" id="orderAmount" name="orderAmount" value="5">5
+            </div>
+            <div>
+                <label>Size:</label>
+                <input type="radio" id="size" name="size" value="L">Large
+                <input type="radio" id="size" name="size" value="M">Medium
+                <input type="radio" id="size" name="size" value="S">Small
+            </div>
+            <div>
+                <label>Sugar:</label>
+                <input type="radio" id="sugar" name="sugar" value="100">100%
+                <input type="radio" id="sugar" name="sugar" value="75">75%
+                <input type="radio" id="sugar" name="sugar" value="50">50%
+                <input type="radio" id="sugar" name="sugar" value="25">25%
+                <input type="radio" id="sugar" name="sugar" value="0">0%
+            </div>
+            <div class="actions">
+                <button type="button" onclick="link('create')">CREATE</button>
+                <button type="button" onclick="link('update')">UPDATE</button>
+                <button type="button" onclick="link('read')">READ</button>
+                <button type="button" onclick="link('delete')">DELETE</button>
+                <button type="reset">RESET</button>
+            </div>
+        </form>
+        <form method="get" action="/logout" style="margin-top: 20px;">
+            <button type="submit">LOGOUT</button>
+        </form>
+    </div>
 </body>
 </html>
