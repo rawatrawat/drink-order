@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>Order Form</title>
     <style>
@@ -12,7 +13,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            color: #fff;
+            color: #000; /* Black text color */
             text-align: center;
         }
         .form-container {
@@ -25,6 +26,7 @@
         }
         .form-container h1 {
             margin-bottom: 20px;
+            font-size: 2em; /* Increased font size for heading */
         }
         .form-container input[type="radio"] {
             margin-right: 10px;
@@ -32,6 +34,7 @@
         .form-container label {
             display: block;
             margin: 10px 0;
+            font-size: 1em; /* Increased font size for labels */
         }
         .form-container button {
             background-color: #4CAF50; /* Green background */
@@ -60,6 +63,18 @@
             height: auto;
             vertical-align: middle;
             margin-right: 10px;
+        }
+        .logout-button {
+            background-color: #4CAF50; /* Green background for logout button */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .logout-button:hover {
+            background-color: #45a049; /* Darker green on hover */
         }
     </style>
 </head>
@@ -117,7 +132,7 @@
             </div>
         </form>
         <form method="get" action="/logout">
-            <input type="submit" value="LOGOUT"/>
+            <input type="submit" value="LOGOUT" class="logout-button"/>
         </form>
     </div>
 
