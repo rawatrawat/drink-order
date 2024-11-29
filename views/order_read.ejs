@@ -1,38 +1,94 @@
-<!-- index.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>SUCCESS</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('/th.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #fff;
+            text-align: center;
+        }
+        .success-container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 400px;
+        }
+        .success-container h1 {
+            margin-bottom: 20px;
+        }
+        .success-container ul {
+            list-style: none;
+            padding: 0;
+        }
+        .success-container li {
+            margin: 10px 0;
+        }
+        .success-container button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+        .success-container button:hover {
+            background-color: #45a049;
+        }
+        .success-container img {
+            width: 50px;
+            height: 50px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>SUCCESS</h1>
-    
-    <div id="actionDisplay">
-        <% if (action) { %>
-            <p>Action: <%= action %> performed</p>
-        <% } %>
-    </div>
+    <div class="success-container">
+        <h1>SUCCESS</h1>
+        
+        <div id="actionDisplay">
+            <% if (action) { %>
+                <p>Action: <%= action %> performed</p>
+            <% } %>
+        </div>
 
-    <div id="orderResults">
-        <% if (results && results.length > 0) { %>
-            <h2>Order Details:</h2>
-            <ul>
-                <% results.forEach(result => { %>
-                    <li>Name: <%= result.name %></li>
-                    <li>Ice: <%= result.ice %></li>
-                    <li>Order Amount: <%= result.orderAmount %></li>
-                    <li>Size: <%= result.size %></li>
-                    <li>Sugar: <%= result.sugar %></li>
-                    <br>
-                <% }); %>
-            </ul>
+        <div id="orderResults">
+            <% if (results && results.length > 0) { %>
+                <h2>Order Details:</h2>
+                <ul>
+                    <% results.forEach(result => { %>
+                        <li>
+                            <img src="/<%= result.name %>.jpg" alt="<%= result.name %>">
+                            Name: <%= result.name %>
+                        </li>
+                        <li>Ice: <%= result.ice %></li>
+                        <li>Order Amount: <%= result.orderAmount %></li>
+                        <li>Size: <%= result.size %></li>
+                        <li>Sugar: <%= result.sugar %></li>
+                        <br>
+                    <% }); %>
+                </ul>
             <% } else { %>
                 <p>No results found.</p>
             <% } %>
-    </div>
+        </div>
 
-    <button onclick="navigateHome()">Back to Home</button>
+        <button onclick="navigateHome()">Back to Home</button>
+    </div>
 
     <script>
         function navigateHome() {
