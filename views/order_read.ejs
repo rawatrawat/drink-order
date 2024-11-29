@@ -28,13 +28,6 @@
         .success-container h1 {
             margin-bottom: 20px;
         }
-        .success-container ul {
-            list-style: none;
-            padding: 0;
-        }
-        .success-container li {
-            margin: 10px 0;
-        }
         .success-container button {
             background-color: #4CAF50;
             color: white;
@@ -47,12 +40,6 @@
         }
         .success-container button:hover {
             background-color: #45a049;
-        }
-        .success-container img {
-            width: 50px;
-            height: 50px;
-            vertical-align: middle;
-            margin-right: 10px;
         }
     </style>
 </head>
@@ -71,10 +58,7 @@
                 <h2>Order Details:</h2>
                 <ul>
                     <% results.forEach(result => { %>
-                        <li>
-                            <img src="/<%= result.name %>.jpg" alt="<%= result.name %>">
-                            Name: <%= result.name %>
-                        </li>
+                        <li>Name: <%= result.name %></li>
                         <li>Ice: <%= result.ice %></li>
                         <li>Order Amount: <%= result.orderAmount %></li>
                         <li>Size: <%= result.size %></li>
