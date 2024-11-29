@@ -7,7 +7,9 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-image: url('/images/background.jpg');
+            background-size: cover;
+            background-position: center;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -15,11 +17,11 @@
             margin: 0;
         }
         .order-form-container {
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.9);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
+            width: 500px;
             text-align: center;
         }
         .order-form-container h1 {
@@ -36,11 +38,12 @@
             background-color: #4CAF50;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 15px 20px;
             border-radius: 5px;
             cursor: pointer;
-            width: 100%;
+            margin: 5px;
             font-size: 16px;
+            width: 100%;
         }
         .order-form-container button:hover {
             background-color: #45a049;
@@ -122,11 +125,11 @@
         function link(a) {
             const CRUD = a;
             const curUrl = window.location.href;
-            const name = document.getElementById('name').value;
-            const ice = document.getElementById('ice').value;
-            const orderAmount = document.getElementById('orderAmount').value;
-            const size = document.getElementById('size').value;
-            const sugar = document.getElementById('sugar').value;
+            const name = document.querySelector('input[name="name"]:checked').value;
+            const ice = document.querySelector('input[name="ice"]:checked').value;
+            const orderAmount = document.querySelector('input[name="orderAmount"]:checked').value;
+            const size = document.querySelector('input[name="size"]:checked').value;
+            const sugar = document.querySelector('input[name="sugar"]:checked').value;
             let url = `${curUrl}/${CRUD}?name=${name}&ice=${ice}&orderAmount=${orderAmount}&size=${size}&sugar=${sugar}`;
             document.getElementById('form1').action = url;
             document.getElementById('form1').submit();
