@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-image: url('/th.jpg');
+            background-image: url('/drink.jpg');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -15,30 +15,25 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            color: #fff;
-            text-align: center;
+            color: #333;
         }
-        .success-container {
-            background-color: rgba(0, 0, 0, 0.7);
+        #actionDisplay, #orderResults {
+            background-color: rgba(255, 255, 255, 0.9);
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            width: 400px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
         }
-        .success-container h1 {
-            margin-bottom: 20px;
-        }
-        .success-container p {
-            font-size: 18px;
-        }
-        .success-container ul {
+        #orderResults ul {
             list-style: none;
             padding: 0;
         }
-        .success-container li {
-            margin: 10px 0;
+        #orderResults li {
+            margin-bottom: 10px;
         }
-        .success-container button {
+        button {
             background-color: #4CAF50;
             color: white;
             border: none;
@@ -48,14 +43,12 @@
             margin-top: 20px;
             font-size: 16px;
         }
-        .success-container button:hover {
+        button:hover {
             background-color: #45a049;
         }
     </style>
 </head>
 <body>
-    <h1>SUCCESS</h1>
-    
     <div id="actionDisplay">
         <% if (action) { %>
             <p>Action: <%= action %> performed</p>
@@ -72,12 +65,11 @@
                     <li>Order Amount: <%= result.orderAmount %></li>
                     <li>Size: <%= result.size %></li>
                     <li>Sugar: <%= result.sugar %></li>
-                    <br>
                 <% }); %>
             </ul>
-            <% } else { %>
-                <p>No results found.</p>
-            <% } %>
+        <% } else { %>
+            <p>No results found.</p>
+        <% } %>
     </div>
 
     <button onclick="navigateHome()">Back to Home</button>
