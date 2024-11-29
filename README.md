@@ -8,16 +8,14 @@
 
 # Project File Intro
 - server.js: Main server file that handles routing and middleware.
+- Contains Mongoose schema files for database models.
+>> User.js for User schema 
 - package.json: Lists all dependencies and project scripts.
-- public (folder): Contains static files like CSS, JavaScript, and images.
+- public (folder): Contains static files like CSS, and images.
 - views (folder): Contains EJS templates for web pages.
 
-- models (folder): Contains Mongoose schema files for database models.
->> drink.js for drinks schema
->> User.js for User schema 
-
 # Cloud URL
-- [Our server URL: (https://drink-order-2.onrender.com)]
+(https://three81project-group56.onrender.com)
 
 # Operation Guides
 ## Login/Logout Pages
