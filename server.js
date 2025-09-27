@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-mongoose.connect('mongodb+srv://=@cluster0.3aytms0.mongodb.net/DrinksOrderSystem', {
+mongoose.connect('', {
   retryWrites: true,
   w: 'majority'
 });
@@ -370,4 +370,5 @@ app.delete('/api/orders/drinks_name/:drinks_name', async function(req, res) {  /
 });
 
 app.listen(process.env.PORT || 8099);
+
 
